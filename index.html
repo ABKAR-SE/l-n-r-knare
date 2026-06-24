@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="it"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Valley — Arbetsschema &amp; Lön 2026</title>
+<link href="Oussama%20l%C3%B6n_files/css2.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ── DARK THEME (default) ── */
+body{
+  --bg:#050a14;--surface:#0a1628;--surface2:#0f1f3d;--border:#1a3a6e;
+  --text:#e0f0ff;--muted:#6a8aaa;--cyan:#00e5ff;--green:#39ff14;
+  --input-bg:#070e1a;--input-border:#1a3a6e;--input-color:#00e5ff;
+  --row-hover:#0a1e3a;--row-weekend-color:#6a8aaa;--today-bg:#001a2e;
+  --thead-bg:#07101f;--tfoot-bg:#0f1f3d;--header-bg:#0a1628;
+  --controls-bg:#07101f;--tab-inactive:#07101f;--tab-active:#0a1628;
+  --scard-bg:#0a1628;--export-bg:#0f1f3d;
+  --note-color:#a0b8d0;--acc-color:#e0a060;--paga-color:#a0c0e0;
+  background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;min-height:100vh;
+}
+
+/* ── LIGHT THEME ── */
+body.light{
+  --bg:#f4f6fa;--surface:#ffffff;--surface2:#e8eef8;--border:#c0cde0;
+  --text:#1a2a3a;--muted:#7a8fa8;--cyan:#0066cc;--green:#1a7a00;
+  --input-bg:#ffffff;--input-border:#b0c0d8;--input-color:#0055aa;
+  --row-hover:#e8f0fa;--row-weekend-color:#9aabbf;--today-bg:#e0f0ff;
+  --thead-bg:#e0e8f4;--tfoot-bg:#d8e4f4;--header-bg:#1a3a6e;
+  --controls-bg:#eef2f8;--tab-inactive:#dde6f4;--tab-active:#ffffff;
+  --scard-bg:#ffffff;--export-bg:#1a3a6e;
+  --note-color:#5a7090;--acc-color:#a05a00;--paga-color:#405a80;
+  background:var(--bg);color:var(--text);
+}
+
+body.light .logo-text{color:#ffffff}
+body.light .logo-sub{color:#a0c0e0}
+body.light .badge{background:#0f2a5e;border-color:#0055aa44;color:#ffffff}
+body.light .tab{color:#5a7090}
+body.light .tab.active{color:#0055aa;border-color:#0066cc55}
+body.light .export-btn{background:#1a3a6e;color:#ffffff;border-color:#0055aa}
+body.light .export-btn:hover{background:#0f2a5e}
+body.light .theme-toggle{background:#e8eef8;border-color:#b0c0d8;color:#1a2a3a}
+body.light .month-title{color:#0055aa}
+body.light .mstat span{color:#1a7a00}
+body.light td.computed{color:#1a7a00}
+body.light td.total-dovuto{color:#0055aa}
+body.light .tfoot-row td.sum-ore{color:#1a7a00}
+body.light .tfoot-row td.sum-tot{color:#0055aa}
+body.light .scard-name{color:#0055aa}
+body.light .scard-val{color:#1a7a00}
+body.light .scard-val.blue{color:#0055aa}
+body.light .netto-fill{background:linear-gradient(90deg,#0066cc,#1a7a00)}
+body.light tbody tr:hover{background:var(--row-hover)}
+
+.header{background:var(--header-bg);border-bottom:1px solid var(--border);padding:18px 24px;display:flex;align-items:center;gap:16px}
+.logo-text{font-family:'Orbitron',sans-serif;font-weight:900;font-size:18px;color:var(--cyan);letter-spacing:3px}
+.logo-sub{font-family:'Exo 2',sans-serif;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.badge{background:var(--surface2);border:1px solid #00e5ff22;color:var(--cyan);font-size:10px;font-family:'Orbitron',sans-serif;padding:3px 10px;border-radius:2px;letter-spacing:1px}
+
+.theme-toggle-wrap{margin-left:auto;display:flex;align-items:center;gap:10px}
+.theme-toggle{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;padding:6px 14px;border-radius:2px;cursor:pointer;transition:all .2s;user-select:none}
+.theme-toggle:hover{border-color:var(--cyan);color:var(--text)}
+.toggle-dot{width:28px;height:14px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;position:relative;transition:background .2s}
+.toggle-dot::after{content:'';position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;background:var(--muted);transition:all .2s}
+body:not(.light) .toggle-dot{background:var(--cyan)22;border-color:var(--cyan)55}
+body:not(.light) .toggle-dot::after{background:var(--cyan);left:15px}
+
+.controls{display:flex;gap:10px;padding:14px 24px;background:var(--controls-bg);border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+.ctrl-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-right:4px}
+select,input[type=number],input[type=text],input[type=time]{background:var(--input-bg);border:1px solid var(--input-border);color:var(--text);font-family:'Exo 2',sans-serif;font-size:13px;padding:6px 12px;border-radius:3px;outline:none;cursor:pointer}
+select:focus,input:focus{border-color:var(--cyan)55}
+
+.tab-bar{display:flex;gap:2px;padding:12px 24px 0;background:var(--bg);flex-wrap:wrap}
+.tab{padding:8px 20px;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;cursor:pointer;border:1px solid var(--border);border-bottom:none;background:var(--tab-inactive);color:var(--muted);transition:all .2s;border-radius:3px 3px 0 0}
+.tab.active{background:var(--tab-active);color:var(--cyan);border-color:var(--cyan)55}
+.tab:hover:not(.active){color:var(--text);background:var(--surface)}
+
+.content{padding:20px 24px}
+.month-block{margin-bottom:28px;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.month-header{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.month-title{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--cyan)}
+.month-stats{display:flex;gap:20px}
+.mstat{font-size:11px;color:var(--muted)}
+.mstat span{color:var(--green);font-weight:600}
+
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{background:var(--thead-bg);color:var(--muted);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;padding:7px 8px;text-align:center;border-bottom:1px solid var(--border);font-weight:400}
+tbody tr{border-bottom:1px solid var(--surface2);transition:background .15s}
+tbody tr:hover{background:var(--row-hover)}
+tbody tr.weekend td{color:var(--row-weekend-color)}
+tbody tr.today td{background:var(--today-bg)}
+td{padding:5px 8px;text-align:center;vertical-align:middle}
+td.day-name{text-align:left;color:var(--muted);font-size:11px;min-width:80px}
+td.day-name.workday{color:var(--text)}
+td input[type=time],td input[type=number],td input[type=text]{background:var(--input-bg);border:1px solid var(--input-border);color:var(--input-color);font-family:'Exo 2',sans-serif;font-size:12px;padding:3px 6px;width:100%;text-align:center;border-radius:2px;outline:none}
+td input:focus{border-color:var(--cyan);background:var(--surface)}
+td input[type=number].paga{color:var(--paga-color)}
+td input[type=number].acc{color:var(--acc-color)}
+td.computed{color:var(--green);font-weight:600;font-size:12px}
+td.total-dovuto{color:var(--cyan);font-weight:600}
+td.note-cell input{text-align:left;color:var(--note-color);font-size:11px}
+.tfoot-row td{background:var(--tfoot-bg);color:var(--text);font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:1px;padding:8px;border-top:1px solid var(--border)}
+.tfoot-row td.sum-ore{color:var(--green);font-weight:700}
+.tfoot-row td.sum-tot{color:var(--cyan);font-weight:700}
+
+.summary-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.scard{background:var(--scard-bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px}
+.scard-name{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--cyan);letter-spacing:2px;margin-bottom:12px}
+.scard-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--surface2);font-size:12px}
+.scard-row:last-child{border-bottom:none}
+.scard-label{color:var(--muted)}
+.scard-val{color:var(--green);font-weight:600;font-family:'Orbitron',sans-serif;font-size:11px}
+.scard-val.blue{color:var(--cyan)}
+.netto-bar{margin-top:12px;height:3px;background:var(--border);border-radius:2px}
+.netto-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:2px;transition:width .5s}
+
+.footer-bar{background:var(--controls-bg);border-top:1px solid var(--border);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--muted);font-family:'Orbitron',sans-serif;letter-spacing:1px}
+.export-btn{background:var(--export-bg);border:1px solid var(--cyan)44;color:var(--cyan);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;padding:6px 14px;border-radius:2px;cursor:pointer;transition:all .2s}
+.export-btn:hover{background:var(--cyan)11;border-color:var(--cyan)}
+
+@media print{
+  .controls,.tab-bar,.footer-bar,.theme-toggle-wrap,.export-btn{display:none!important}
+  body{background:#fff!important;color:#000!important}
+  .month-block{border:1px solid #ccc!important;break-inside:avoid}
+  .month-header{background:#e8eef8!important}
+  .month-title{color:#003399!important}
+  thead th{background:#e0e8f4!important;color:#444!important}
+  td.computed{color:#007700!important}
+  td.total-dovuto{color:#003399!important}
+  .tfoot-row td{background:#d8e4f4!important}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo-text">⬡ ATLAS VALLEY</div>
+    <div class="logo-sub">Arbetsschema &amp; Lön — År 2026</div>
+  </div>
+  <div class="theme-toggle-wrap">
+    <span class="badge">APS</span>
+    <span class="badge">VERONA</span>
+    <div class="theme-toggle" onclick="toggleTheme()" title="Cambia tema">
+      <span id="themeLabel">SCURO</span>
+      <div class="toggle-dot" id="toggleDot"></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <span class="ctrl-label">Dipendente:</span>
+  <select id="empSel" onchange="render()">
+    <option value="0" selected="selected">OUSSAMA</option>
+    <option value="1">MOAD</option>
+  </select>
+  <span class="ctrl-label" style="margin-left:12px">Vista:</span>
+  <select id="viewSel" onchange="render()">
+    <option value="month" selected="selected">Mensile</option>
+    <option value="summary">Riepilogo Annuale</option>
+  </select>
+  <span class="ctrl-label" style="margin-left:12px">Paga oraria default (€):</span>
+  <input type="number" id="defPaga" value="7" min="0" step="0.5" style="width:70px" onchange="render()">
+</div>
+
+<div class="tab-bar" id="tabBar"><div class="tab" onclick="currentMonth=0;renderTabs();renderMain()">JAN</div><div class="tab" onclick="currentMonth=1;renderTabs();renderMain()">FEB</div><div class="tab" onclick="currentMonth=2;renderTabs();renderMain()">MAR</div><div class="tab" onclick="currentMonth=3;renderTabs();renderMain()">APR</div><div class="tab" onclick="currentMonth=4;renderTabs();renderMain()">MAJ</div><div class="tab active" onclick="currentMonth=5;renderTabs();renderMain()">JUN</div><div class="tab" onclick="currentMonth=6;renderTabs();renderMain()">JUL</div><div class="tab" onclick="currentMonth=7;renderTabs();renderMain()">AUG</div><div class="tab" onclick="currentMonth=8;renderTabs();renderMain()">SEP</div><div class="tab" onclick="currentMonth=9;renderTabs();renderMain()">OKT</div><div class="tab" onclick="currentMonth=10;renderTabs();renderMain()">NOV</div><div class="tab" onclick="currentMonth=11;renderTabs();renderMain()">DEC</div></div>
+<div class="content" id="mainContent">
+  <div class="month-block">
+    <div class="month-header">
+      <div class="month-title">JUNI 2026 — OUSSAMA</div>
+      <div class="month-stats">
+        <div class="mstat">Ore: <span id="ms_ore_0_5"><span>68.5h</span></span></div>
+        <div class="mstat">Totale: <span id="ms_tot_0_5"><span>€299.50</span></span></div>
+      </div>
+    </div>
+    <table>
+      <thead><tr>
+        <th style="width:32px">#</th>
+        <th style="text-align:left">Giorno</th>
+        <th>Inizio</th><th>Fine</th>
+        <th>Pausa (h)</th><th>Ore</th>
+        <th>Paga (€)</th><th>Acconto (€)</th>
+        <th>Totale</th><th>Note</th>
+      </tr></thead>
+      <tbody><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">01</td>
+      <td class="day-name workday">Lunedì</td>
+      <td><input type="time" value="13:30" onchange="setVal('0_2026_5_1','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="17:30" onchange="setVal('0_2026_5_1','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_1','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_1">4.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_1','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_1','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_1">€28.00</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_1','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">02</td>
+      <td class="day-name workday">Martedì</td>
+      <td><input type="time" value="08:30" onchange="setVal('0_2026_5_2','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="10:30" onchange="setVal('0_2026_5_2','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_2','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_2">2.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_2','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="10" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_2','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_2">€4.00</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_2','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">03</td>
+      <td class="day-name workday">Mercoledì</td>
+      <td><input type="time" value="10:00" onchange="setVal('0_2026_5_3','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="16:30" onchange="setVal('0_2026_5_3','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="1" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_3','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_3">5.50</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_3','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_3','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_3">€38.50</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_3','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">04</td>
+      <td class="day-name workday">Giovedì</td>
+      <td><input type="time" value="08:00" onchange="setVal('0_2026_5_4','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="17:00" onchange="setVal('0_2026_5_4','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="1" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_4','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_4">8.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_4','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="10" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_4','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_4">€46.00</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_4','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">05</td>
+      <td class="day-name workday">Venerdì</td>
+      <td><input type="time" value="07:30" onchange="setVal('0_2026_5_5','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="13:00" onchange="setVal('0_2026_5_5','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_5','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_5">5.50</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_5','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="40" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_5','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_5">€-1.50</td>
+      <td class="note-cell"><input type="text" value="fanale sx bak" placeholder="..." onchange="setVal('0_2026_5_5','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">06</td>
+      <td class="day-name">Sabato</td>
+      <td><input type="time" onchange="setVal('0_2026_5_6','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_6','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_6','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_6">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_6','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_6','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_6">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_6','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">07</td>
+      <td class="day-name">Domenica</td>
+      <td><input type="time" onchange="setVal('0_2026_5_7','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_7','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_7','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_7">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_7','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_7','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_7">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_7','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">08</td>
+      <td class="day-name workday">Lunedì</td>
+      <td><input type="time" value="08:30" onchange="setVal('0_2026_5_8','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="18:30" onchange="setVal('0_2026_5_8','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="3.5" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_8','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_8">6.50</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_8','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="10" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_8','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_8">€35.50</td>
+      <td class="note-cell"><input type="text" value="tanken först" placeholder="..." onchange="setVal('0_2026_5_8','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">09</td>
+      <td class="day-name workday">Martedì</td>
+      <td><input type="time" value="08:00" onchange="setVal('0_2026_5_9','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="16:00" onchange="setVal('0_2026_5_9','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_9','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_9">8.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_9','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="50" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_9','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_9">€6.00</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_9','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">10</td>
+      <td class="day-name workday">Mercoledì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_10','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_10','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_10','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_10">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_10','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_10','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_10">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_10','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">11</td>
+      <td class="day-name workday">Giovedì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_11','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_11','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_11','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_11">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_11','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_11','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_11">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_11','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">12</td>
+      <td class="day-name workday">Venerdì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_12','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_12','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_12','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_12">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_12','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_12','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_12">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_12','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">13</td>
+      <td class="day-name">Sabato</td>
+      <td><input type="time" value="00:00" onchange="setVal('0_2026_5_13','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="01:00" onchange="setVal('0_2026_5_13','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="1" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_13','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_13">0.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_13','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="50" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_13','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_13">€-50.00</td>
+      <td class="note-cell"><input type="text" value="moad -110" placeholder="..." onchange="setVal('0_2026_5_13','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">14</td>
+      <td class="day-name">Domenica</td>
+      <td><input type="time" value="08:00" onchange="setVal('0_2026_5_14','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="16:00" onchange="setVal('0_2026_5_14','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="1" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_14','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_14">7.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_14','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_14','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_14">€49.00</td>
+      <td class="note-cell"><input type="text" value="abbas" placeholder="..." onchange="setVal('0_2026_5_14','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">15</td>
+      <td class="day-name workday">Lunedì</td>
+      <td><input type="time" value="08:00" onchange="setVal('0_2026_5_15','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="19:00" onchange="setVal('0_2026_5_15','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="11" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_15','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_15">0.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_15','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_15','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_15">€0.00</td>
+      <td class="note-cell"><input type="text" value="aina" placeholder="..." onchange="setVal('0_2026_5_15','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">16</td>
+      <td class="day-name workday">Martedì</td>
+      <td><input type="time" value="08:00" onchange="setVal('0_2026_5_16','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="16:00" onchange="setVal('0_2026_5_16','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="1" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_16','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_16">7.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_16','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="10" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_16','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_16">€39.00</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_16','note',this.value)"></td>
+    </tr><tr class=" today">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">17</td>
+      <td class="day-name workday">Mercoledì</td>
+      <td><input type="time" value="08:00" onchange="setVal('0_2026_5_17','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="16:00" onchange="setVal('0_2026_5_17','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="1" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_17','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_17">7.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_17','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_17','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_17">€49.00</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_17','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">18</td>
+      <td class="day-name workday">Giovedì</td>
+      <td><input type="time" value="08:00" onchange="setVal('0_2026_5_18','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="17:00" onchange="setVal('0_2026_5_18','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="1" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_18','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_18">8.00</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_18','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_18','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_18">€56.00</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_18','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">19</td>
+      <td class="day-name workday">Venerdì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_19','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_19','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_19','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_19">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_19','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_19','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_19">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_19','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">20</td>
+      <td class="day-name">Sabato</td>
+      <td><input type="time" onchange="setVal('0_2026_5_20','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_20','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_20','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_20">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_20','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_20','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_20">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_20','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">21</td>
+      <td class="day-name">Domenica</td>
+      <td><input type="time" onchange="setVal('0_2026_5_21','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_21','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_21','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_21">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_21','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_21','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_21">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_21','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">22</td>
+      <td class="day-name workday">Lunedì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_22','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_22','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_22','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_22">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_22','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_22','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_22">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_22','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">23</td>
+      <td class="day-name workday">Martedì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_23','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_23','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_23','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_23">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_23','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_23','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_23">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_23','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">24</td>
+      <td class="day-name workday">Mercoledì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_24','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_24','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_24','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_24">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_24','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_24','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_24">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_24','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">25</td>
+      <td class="day-name workday">Giovedì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_25','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_25','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_25','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_25">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_25','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_25','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_25">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_25','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">26</td>
+      <td class="day-name workday">Venerdì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_26','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_26','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_26','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_26">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_26','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_26','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_26">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_26','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">27</td>
+      <td class="day-name">Sabato</td>
+      <td><input type="time" onchange="setVal('0_2026_5_27','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_27','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_27','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_27">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_27','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_27','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_27">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_27','note',this.value)"></td>
+    </tr><tr class="weekend">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">28</td>
+      <td class="day-name">Domenica</td>
+      <td><input type="time" onchange="setVal('0_2026_5_28','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_28','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_28','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_28">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_28','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_28','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_28">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_28','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">29</td>
+      <td class="day-name workday">Lunedì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_29','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_29','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_29','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_29">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_29','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_29','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_29">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_29','note',this.value)"></td>
+    </tr><tr class="">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">30</td>
+      <td class="day-name workday">Martedì</td>
+      <td><input type="time" onchange="setVal('0_2026_5_30','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" onchange="setVal('0_2026_5_30','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('0_2026_5_30','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_0_5_30">—</td>
+      <td><input type="number" class="paga" value="7" min="0" step="0.5" style="width:60px" onchange="setVal('0_2026_5_30','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="0" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('0_2026_5_30','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_0_5_30">—</td>
+      <td class="note-cell"><input type="text" placeholder="..." onchange="setVal('0_2026_5_30','note',this.value)"></td>
+    </tr></tbody>
+      <tfoot><tr class="tfoot-row">
+        <td colspan="5" style="text-align:right;color:var(--muted);font-size:9px">TOTALE JUNI</td>
+        <td class="sum-ore" id="sf_ore_0_5">68.50h</td>
+        <td></td><td></td>
+        <td class="sum-tot" id="sf_tot_0_5">€299.50</td>
+        <td></td>
+      </tr></tfoot>
+    </table>
+  </div></div>
+
+<div class="footer-bar">
+  <span>ATLAS VALLEY APS · 2026 · <span style="color:var(--cyan)">pantheraleo-atlasvalley.github.io</span></span>
+  <button class="export-btn" onclick="exportCSV()">↓ EXPORT CSV</button>
+</div>
+
+<script>
+const MONTHS_SV=['JANUARI','FEBRUARI','MARS','APRIL','MAJ','JUNI','JULI','AUGUSTI','SEPTEMBER','OKTOBER','NOVEMBER','DECEMBER'];
+const MONTHS_IT=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+const DAYS_IT=['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'];
+const EMPS=['OUSSAMA','MOAD'];
+
+let data={};
+let currentMonth=new Date().getMonth();
+let isLight=false;
+
+function toggleTheme(){
+  isLight=!isLight;
+  document.body.classList.toggle('light',isLight);
+  document.getElementById('themeLabel').textContent=isLight?'CHIARO':'SCURO';
+}
+
+function key(emp,y,m,d){return `${emp}_${y}_${m}_${d}`}
+function getDaysInMonth(y,m){return new Date(y,m+1,0).getDate()}
+function getDow(y,m,d){return (new Date(y,m,d).getDay()+6)%7}
+
+function calcOre(inizio,fine,pausa){
+  if(!inizio||!fine) return null;
+  const [h1,m1]=inizio.split(':').map(Number);
+  const [h2,m2]=fine.split(':').map(Number);
+  let ore=(h2*60+m2-h1*60-m1)/60;
+  if(ore<0) ore+=24;
+  ore-=(parseFloat(pausa)||0);
+  return Math.max(0,Math.round(ore*100)/100);
+}
+
+function getVal(k,field){return (data[k]||{})[field]||''}
+function setVal(k,field,val){if(!data[k]) data[k]={};data[k][field]=val;refreshTotals()}
+
+function refreshTotals(){
+  const emp=parseInt(document.getElementById('empSel').value);
+  const defPaga=parseFloat(document.getElementById('defPaga').value)||7;
+  for(let m=0;m<12;m++){
+    let totOre=0,totAcc=0,totDov=0;
+    const days=getDaysInMonth(2026,m);
+    for(let d=1;d<=days;d++){
+      const k=key(emp,2026,m,d);
+      const inizio=getVal(k,'inizio'),fine=getVal(k,'fine'),pausa=getVal(k,'pausa');
+      const paga=parseFloat(getVal(k,'paga'))||defPaga;
+      const acc=parseFloat(getVal(k,'acconto'))||0;
+      const ore=calcOre(inizio,fine,pausa);
+      const oreEl=document.getElementById(`ore_${emp}_${m}_${d}`);
+      const totEl=document.getElementById(`tot_${emp}_${m}_${d}`);
+      if(ore!==null){
+        const tot=Math.round((ore*paga-acc)*100)/100;
+        if(oreEl) oreEl.textContent=ore.toFixed(2);
+        if(totEl) totEl.textContent='€'+tot.toFixed(2);
+        totOre+=ore;totAcc+=acc;totDov+=tot;
+      } else {
+        if(oreEl) oreEl.textContent='—';
+        if(totEl) totEl.textContent='—';
+      }
+    }
+    const sfOre=document.getElementById(`sf_ore_${emp}_${m}`);
+    const sfTot=document.getElementById(`sf_tot_${emp}_${m}`);
+    if(sfOre) sfOre.textContent=totOre.toFixed(2)+'h';
+    if(sfTot) sfTot.textContent='€'+totDov.toFixed(2);
+    const msOre=document.getElementById(`ms_ore_${emp}_${m}`);
+    const msTot=document.getElementById(`ms_tot_${emp}_${m}`);
+    if(msOre) msOre.innerHTML='<span>'+totOre.toFixed(1)+'h</span>';
+    if(msTot) msTot.innerHTML='<span>€'+totDov.toFixed(2)+'</span>';
+  }
+}
+
+function renderTabs(){
+  const bar=document.getElementById('tabBar');
+  const view=document.getElementById('viewSel').value;
+  if(view!=='month'){bar.innerHTML='';return}
+  bar.innerHTML=MONTHS_SV.map((m,i)=>
+    `<div class="tab${i===currentMonth?' active':''}" onclick="currentMonth=${i};renderTabs();renderMain()">${m.substring(0,3)}</div>`
+  ).join('');
+}
+
+function renderMain(){
+  const view=document.getElementById('viewSel').value;
+  const emp=parseInt(document.getElementById('empSel').value);
+  const defPaga=parseFloat(document.getElementById('defPaga').value)||7;
+  const content=document.getElementById('mainContent');
+  if(view==='summary'){renderSummary(content,defPaga);return}
+  const m=currentMonth;
+  const days=getDaysInMonth(2026,m);
+  let rows='';
+  for(let d=1;d<=days;d++){
+    const dow=getDow(2026,m,d);
+    const k=key(emp,2026,m,d);
+    const isWe=dow>=5;
+    const isToday=(new Date().getFullYear()===2026&&new Date().getMonth()===m&&new Date().getDate()===d);
+    const inizio=getVal(k,'inizio'),fine=getVal(k,'fine');
+    const pausa=getVal(k,'pausa'),paga=getVal(k,'paga')||defPaga;
+    const acc=getVal(k,'acconto')||'0',note=getVal(k,'note');
+    const ore=calcOre(inizio,fine,pausa);
+    const tot=ore!==null?'€'+(ore*parseFloat(paga)-parseFloat(acc)).toFixed(2):'—';
+    rows+=`<tr class="${isWe?'weekend':''}${isToday?' today':''}">
+      <td style="color:var(--muted);font-size:11px;padding-left:12px">${d.toString().padStart(2,'0')}</td>
+      <td class="day-name${isWe?'':' workday'}">${DAYS_IT[dow]}</td>
+      <td><input type="time" value="${inizio}" onchange="setVal('${k}','inizio',this.value);refreshTotals()"></td>
+      <td><input type="time" value="${fine}" onchange="setVal('${k}','fine',this.value);refreshTotals()"></td>
+      <td><input type="number" value="${pausa}" placeholder="0" min="0" step="0.25" style="width:55px" onchange="setVal('${k}','pausa',this.value);refreshTotals()"></td>
+      <td class="computed" id="ore_${emp}_${m}_${d}">${ore!==null?ore.toFixed(2):'—'}</td>
+      <td><input type="number" class="paga" value="${paga}" min="0" step="0.5" style="width:60px" onchange="setVal('${k}','paga',this.value);refreshTotals()"></td>
+      <td><input type="number" class="acc" value="${acc}" placeholder="0" min="0" step="1" style="width:60px" onchange="setVal('${k}','acconto',this.value);refreshTotals()"></td>
+      <td class="total-dovuto" id="tot_${emp}_${m}_${d}">${tot}</td>
+      <td class="note-cell"><input type="text" value="${note}" placeholder="..." onchange="setVal('${k}','note',this.value)"></td>
+    </tr>`;
+  }
+  content.innerHTML=`
+  <div class="month-block">
+    <div class="month-header">
+      <div class="month-title">${MONTHS_SV[m]} 2026 — ${EMPS[emp]}</div>
+      <div class="month-stats">
+        <div class="mstat">Ore: <span id="ms_ore_${emp}_${m}"><span>0.0h</span></span></div>
+        <div class="mstat">Totale: <span id="ms_tot_${emp}_${m}"><span>€0.00</span></span></div>
+      </div>
+    </div>
+    <table>
+      <thead><tr>
+        <th style="width:32px">#</th>
+        <th style="text-align:left">Giorno</th>
+        <th>Inizio</th><th>Fine</th>
+        <th>Pausa (h)</th><th>Ore</th>
+        <th>Paga (€)</th><th>Acconto (€)</th>
+        <th>Totale</th><th>Note</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr class="tfoot-row">
+        <td colspan="5" style="text-align:right;color:var(--muted);font-size:9px">TOTALE ${MONTHS_SV[m]}</td>
+        <td class="sum-ore" id="sf_ore_${emp}_${m}">0.00h</td>
+        <td></td><td></td>
+        <td class="sum-tot" id="sf_tot_${emp}_${m}">€0.00</td>
+        <td></td>
+      </tr></tfoot>
+    </table>
+  </div>`;
+  refreshTotals();
+}
+
+function renderSummary(content,defPaga){
+  let cards='';
+  for(let ei=0;ei<2;ei++){
+    let rows='',grandOre=0,grandDov=0,grandAcc=0;
+    for(let m=0;m<12;m++){
+      let totOre=0,totAcc=0,totDov=0;
+      const days=getDaysInMonth(2026,m);
+      for(let d=1;d<=days;d++){
+        const k=key(ei,2026,m,d);
+        const inizio=getVal(k,'inizio'),fine=getVal(k,'fine'),pausa=getVal(k,'pausa');
+        const paga=parseFloat(getVal(k,'paga'))||defPaga;
+        const acc=parseFloat(getVal(k,'acconto'))||0;
+        const ore=calcOre(inizio,fine,pausa);
+        if(ore!==null){totOre+=ore;totAcc+=acc;totDov+=ore*paga-acc;}
+      }
+      grandOre+=totOre;grandAcc+=totAcc;grandDov+=totDov;
+      if(totOre>0) rows+=`<div class="scard-row"><span class="scard-label">${MONTHS_IT[m]}</span><span class="scard-val blue">${totOre.toFixed(1)}h · €${totDov.toFixed(2)}</span></div>`;
+    }
+    if(!rows) rows='<div class="scard-row"><span class="scard-label" style="font-size:11px">Nessun dato inserito</span></div>';
+    cards+=`<div class="scard">
+      <div class="scard-name">${EMPS[ei]}</div>
+      ${rows}
+      <div class="scard-row" style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px">
+        <span class="scard-label">Ore totali</span><span class="scard-val">${grandOre.toFixed(1)}h</span>
+      </div>
+      <div class="scard-row">
+        <span class="scard-label">Acconti versati</span><span class="scard-val" style="color:var(--acc-color)">€${grandAcc.toFixed(2)}</span>
+      </div>
+      <div class="scard-row">
+        <span class="scard-label">Totale dovuto</span><span class="scard-val blue">€${grandDov.toFixed(2)}</span>
+      </div>
+      <div class="netto-bar"><div class="netto-fill" style="width:${grandOre>0?Math.min(100,grandOre/500*100):0}%"></div></div>
+    </div>`;
+  }
+  content.innerHTML=`<div class="summary-panel">${cards}</div>
+  <div style="color:var(--muted);font-size:11px;font-family:'Orbitron',sans-serif;letter-spacing:2px;text-align:center;padding:12px">
+    SELEZIONA UN MESE DAL MENU PER INSERIRE I TURNI
+  </div>`;
+}
+
+function exportCSV(){
+  const emp=parseInt(document.getElementById('empSel').value);
+  const defPaga=parseFloat(document.getElementById('defPaga').value)||7;
+  let csv='Data,Giorno,Inizio,Fine,Pausa,Ore,Paga,Acconto,Totale,Note\n';
+  for(let m=0;m<12;m++){
+    const days=getDaysInMonth(2026,m);
+    for(let d=1;d<=days;d++){
+      const k=key(emp,2026,m,d);
+      const inizio=getVal(k,'inizio'),fine=getVal(k,'fine');
+      if(!inizio&&!fine) continue;
+      const pausa=getVal(k,'pausa')||'0';
+      const paga=parseFloat(getVal(k,'paga'))||defPaga;
+      const acc=parseFloat(getVal(k,'acconto'))||0;
+      const ore=calcOre(inizio,fine,pausa)||0;
+      const tot=(ore*paga-acc).toFixed(2);
+      const dow=getDow(2026,m,d);
+      const note=getVal(k,'note');
+      csv+=`${d.toString().padStart(2,'0')}/${(m+1).toString().padStart(2,'0')}/2026,${DAYS_IT[dow]},${inizio},${fine},${pausa},${ore.toFixed(2)},${paga},${acc},${tot},"${note}"\n`;
+    }
+  }
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`AtlasValley_${EMPS[emp]}_2026.csv`;
+  a.click();
+}
+
+function render(){renderTabs();renderMain()}
+render();
+</script>
+
+
+</body></html>
